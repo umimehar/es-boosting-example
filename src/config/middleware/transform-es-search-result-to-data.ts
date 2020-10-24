@@ -1,5 +1,10 @@
-import map from 'lodash/map';
+import map from "lodash/map";
 
-export function transformEsSearchResultToData(resp: any): any {
-    return { list: map(resp?.body?.hits?.hits, '_source'), meta: { total: resp?.body?.hits?.total?.value } };
+export function transformEsSearchResultToData(
+  data: any // es search resp
+): { list: any[]; meta: { total: number } } {
+  return {
+    list: map(data?.body?.hits?.hits, "_source"),
+    meta: { total: data?.body?.hits?.total?.value },
+  };
 }

@@ -1,24 +1,24 @@
 import { appConfig } from "../env";
 import { logger } from "../../util/logger";
-const { Client } = require('@elastic/elasticsearch');
-
+const { Client } = require("@elastic/elasticsearch");
 
 import productDoc = require("../../products.json");
 
 export const indexerName: string = "example-products";
 
 export async function postMockDataToEs(): Promise<void> {
-  const elasticsearchUrl: string = appConfig.elasticSearchUrl;
-  const indexUrl: string = `${elasticsearchUrl}/${indexerName}`;
-  const client = new Client({ node: appConfig.elasticSearchUrl });
+  const client: any = new Client({ node: appConfig.elasticSearchUrl });
   const products: any[] = productDoc.products;
 
   try {
     // delete index if there is
     // create indexer
-    await client.indices.delete({
-      index: indexerName,
-    }, { ignore: [400] });
+    await client.indices.delete(
+      {
+        index: indexerName,
+      },
+      { ignore: [400] }
+    );
     // const { data } = await httpClient.httpDEL({ url: indexUrl });
   } catch (e) {
     if (e.statusCode == 404) {
@@ -30,21 +30,28 @@ export async function postMockDataToEs(): Promise<void> {
 
   try {
     // create indexer
-    await client.indices.create({
-      index: indexerName,
-      body: {
-        settings: {
-          analysis: getElasticsEachFiltersAndAnalyzer(),
+    await client.indices.create(
+      {
+        index: indexerName,
+        body: {
+          settings: {
+            analysis: getElasticsEachFiltersAndAnalyzer(),
+          },
+          mappings: getProductProperties(),
         },
-        mappings: getProductProperties(),
+      },
+      { ignore: [400] }
+    );
 
-      }
-    }, { ignore: [400] });
-
-    const body = products.flatMap(doc => [{ index: { _index: indexerName } }, doc]);
+    const body: any[] = products.flatMap((doc) => [
+      { index: { _index: indexerName } },
+      doc,
+    ]);
     // put data
-    const { body: responseFromPost } = await client.bulk({ refresh: true, body });
-
+    const { body: responseFromPost } = await client.bulk({
+      refresh: true,
+      body,
+    });
   } catch (e) {
     logger.error("Error connecting elastic search.");
     return;

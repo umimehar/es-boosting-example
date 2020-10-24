@@ -6,6 +6,7 @@ import { BaseValidationType } from "../../types/validators";
 import { body } from "express-validator";
 import { reqValidationResult } from "../../config/middleware/req-validation-result";
 import { transformEsSearchResultToData } from "../../config/middleware/transform-es-search-result-to-data";
+
 const { Client } = require("@elastic/elasticsearch");
 
 interface IReq extends IAppRequest {
@@ -37,11 +38,16 @@ export async function actionGetProductsByQuery(
   req: IReq,
   res: IAppResponse
 ): Promise<IRes> {
-  const { query, page = 1, size = 20 }: { query: string, page: number, size: number} = req.body;
+  const {
+    query,
+    page = 1,
+    size = 20,
+  }: { query: string; page: number; size: number } = req.body;
 
   const offset: number = (page - 1) * size;
 
-  const client = new Client({ node: appConfig.elasticSearchUrl });
+  // will sync type later
+  const client: any = new Client({ node: appConfig.elasticSearchUrl });
 
   const esQuery: any = {
     query: {
@@ -64,12 +70,12 @@ export async function actionGetProductsByQuery(
     },
   };
 
-  const esProductData = await client.search(
+  const esProductData: any[] = await client.search(
     {
       index: indexerName,
       body: esQuery,
       from: offset,
-      size
+      size,
     },
     {
       ignore: [404],
