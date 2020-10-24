@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "name": "Milk 500ml",
+      "brand": "AlAin",
+      "brand_boost": 1
+    },
+    {
+      "name": "Milk 500ml",
+      "brand": "AlMarai",
+      "brand_boost": 2
+    },
+    {
+      "name": "Milk 500ml",
+      "brand": "AlRawabi",
+      "brand_boost": 1
+    },
+    {
+      "name": "Milk 700ml",
+      "brand": "AlMarai",
+      "brand_boost": 2
+    },
+    {
+      "name": "Ice Cream",
+      "brand": "baskin robin",
+      "brand_boost": 1
+    },
+    {
+      "name": "IceCream",
+      "brand": "baskin robin",
+      "brand_boost": 1
+    },
+    {
+      "name": "IceCream 400ml",
+      "brand": "baskin robin",
+      "brand_boost": 1
+    },
+    {
+      "name": "ICECREAM",
+      "brand": "baskin robin",
+      "brand_boost": 1
+    },
+    {
+      "name": "icecream",
+      "brand": "baskin robin",
+      "brand_boost": 1
+    },
+    {
+      "name": "pepsi 500ml",
+      "brand": "pepsi",
+      "brand_boost": 1
+    }
+  ]
+}
