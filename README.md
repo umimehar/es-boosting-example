@@ -5,7 +5,7 @@ To run the example
 
 Make sure elastic search is running on localhost:9200, you can change this config in [src/config/env.index](https://github.com/umimehar/es-boosting-example/blob/master/src/config/env/index.ts ).
 
-###Elastic Search Related files
+### Elastic Search Related files
 
 **Delete/Create/Post index**
  - [src/config/es/post-mock-data-to-es.ts](https://github.com/umimehar/es-boosting-example/blob/master/src/config/es/post-mock-data-to-es.ts "post-mock-data-to-es.ts")
